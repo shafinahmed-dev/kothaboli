@@ -9,3 +9,14 @@ node_modules/
 
 # macOS
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.pyc
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
