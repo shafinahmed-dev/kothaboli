@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
-import { ArchetypeModal } from '@/components/layout/ArchetypeModal'
+import { PersonaModal } from '@/components/layout/PersonaModal'
 
 export const metadata: Metadata = {
   title: 'KothaBoli | কথাবলি',
@@ -37,7 +37,7 @@ export default async function RootLayout({
         style={{ fontFamily: "'Inter', 'Noto Sans Bengali', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" }}
       >
         <Navbar profile={profile} />
-        {isAuthenticated && !profile && <ArchetypeModal hasProfile={false} />}
+        {isAuthenticated && !profile && <PersonaModal hasProfile={false} />}
         <main className="container mx-auto px-4 mt-6 flex-1">
           {children}
         </main>

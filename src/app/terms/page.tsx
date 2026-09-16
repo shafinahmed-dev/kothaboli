@@ -7,7 +7,7 @@ export default function TermsPage() {
       
       <section className="space-y-4 text-neutral-300 leading-relaxed font-medium">
         <h2 className="text-xl font-bold text-white mt-8">1. User Generated Content (UGC) Disclaimer</h2>
-        <p>KothaBoli is an open, ephemeral discussion platform. The views, opinions, and information posted by users (Archetypes) are their own and do not reflect the views of KothaBoli. We are not responsible for the accuracy or consequences of user-generated content.</p>
+        <p>KothaBoli is an open, ephemeral discussion platform. The views, opinions, and information posted by users (Personas) are their own and do not reflect the views of KothaBoli. We are not responsible for the accuracy or consequences of user-generated content.</p>
         
         <h2 className="text-xl font-bold text-white mt-8">2. Ephemeral Data Policy</h2>
         <p>All discussion threads and their associated comments are designed to be explicitly temporary. Exactly 7 days (168 hours) after creation, the original text bodies are permanently purged from our primary database structures. We do not offer recovery services for purged data.</p>

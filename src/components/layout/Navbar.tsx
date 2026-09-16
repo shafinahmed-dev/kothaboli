@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
-import { ArchetypeAvatar } from '@/components/boards/ArchetypeAvatar'
+import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
 import { LogOut, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { NotificationDropdown } from './NotificationDropdown'
@@ -44,7 +44,7 @@ export function Navbar({ profile }: { profile: any }) {
               <NotificationDropdown />
               
               <Link href="/profile" className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 hover:border-neutral-700 hover:bg-neutral-800 transition">
-                <ArchetypeAvatar archetypeId={profile.archetype} className="w-6 h-6 text-sm" />
+                <PersonaAvatar archetypeId={profile.persona} className="w-6 h-6 text-sm" />
                 <span className="text-sm font-bold text-slate-200 hidden sm:inline">{profile.handle}</span>
               </Link>
 

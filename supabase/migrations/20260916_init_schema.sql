@@ -20,6 +20,7 @@ CREATE TABLE public.threads (
     title TEXT NOT NULL,
     body TEXT,
     total_interactions INT DEFAULT 0,
+    views INT DEFAULT 0,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     expires_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '7 days'),
     is_expired BOOLEAN DEFAULT FALSE

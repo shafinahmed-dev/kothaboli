@@ -2,7 +2,7 @@ import { getThreadWithComments } from '@/app/actions/comments'
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArchetypeAvatar } from '@/components/boards/ArchetypeAvatar'
+import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
 import { TagPill } from '@/components/boards/TagPill'
 import { getTimeAgo, getTimeRemaining } from '@/lib/utils'
 import { CommentList } from '@/components/threads/CommentList'
@@ -49,7 +49,7 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
       <article className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 mb-4 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
-            <ArchetypeAvatar archetypeId={profile.archetype} className="w-10 h-10 text-lg" />
+            <PersonaAvatar archetypeId={profile.persona} className="w-10 h-10 text-lg" />
             <div>
               <div className="text-base font-bold text-slate-200">{profile.handle}</div>
               <div className="text-xs text-neutral-500 font-bold">{getTimeAgo(thread.created_at)}</div>
@@ -72,10 +72,14 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
           {thread.body}
         </div>
 
-        <div className="mt-8 pt-6 border-t border-neutral-800/60 flex items-center justify-between text-xs font-bold text-neutral-500 uppercase tracking-widest">
-          <div className="flex items-center gap-2">
-            <MessageSquare className="w-4 h-4" />
-            <span>{thread.total_interactions} Interlinks</span>
+        <div className="mt-8 pt-6 border-t border-neutral-800/60 flex items-center justify-between text-xs font-bold text-neutral-400 flex-wrap gap-4">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5 bg-neutral-950 px-3 py-1.5 rounded-xl border border-neutral-800">
+              🔥 {thread.views || 0} views
+            </span>
+            <span className="flex items-center gap-1.5 bg-neutral-950 px-3 py-1.5 rounded-xl border border-neutral-800">
+              💬 {comments.length} comments
+            </span>
           </div>
         </div>
       </article>

@@ -60,7 +60,7 @@ export async function getThreads(tag?: string) {
     .from('threads')
     .select(`
       *,
-      profiles!threads_author_id_fkey(handle, archetype),
+      profiles!threads_author_id_fkey(handle, persona),
       comments(count)
     `)
     .eq('is_expired', false)

@@ -7,10 +7,10 @@ export default function PrivacyPage() {
       
       <section className="space-y-4 text-neutral-300 leading-relaxed font-medium">
         <h2 className="text-xl font-bold text-white mt-8">1. Minimal Data Collection</h2>
-        <p>KothaBoli is built on the premise of pseudo-anonymity. We require Google OAuth solely to prevent spam and abuse. Your email address is stored securely on our backend authentication provider and is never displayed publicly, linked to your archetype, or sold to third parties.</p>
+        <p>KothaBoli is built on the premise of pseudo-anonymity. We require Google OAuth solely to prevent spam and abuse. Your email address is stored securely on our backend authentication provider and is never displayed publicly, linked to your persona, or sold to third parties.</p>
 
         <h2 className="text-xl font-bold text-white mt-8">2. Ephemeral Storage Life-Cycle</h2>
-        <p>We do not hoard your words. Text bodies in threads and comments are rigidly hard-deleted from our active relational database after 168 hours. Only structural interaction metadata (e.g., total interlinks) and standard system logs remain for operational integrity.</p>
+        <p>We do not hoard your words. Text bodies in threads and comments are rigidly hard-deleted from our active relational database after 168 hours. Only structural interaction metadata (e.g., total interactions) and standard system logs remain for operational integrity.</p>
 
         <h2 className="text-xl font-bold text-white mt-8">3. Cookies & Local Session Handling</h2>
         <p>We use essential cookies to maintain your authenticated session. We do not deploy proprietary long-term behavioral tracking cookies for our own analytics.</p>

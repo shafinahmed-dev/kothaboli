@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { generateArchetypeHandle } from '@/lib/constants/archetypes'
+import { generateArchetypeHandle } from '@/lib/constants/personas'
 import { revalidatePath } from 'next/cache'
 
 export async function createProfile(archetypeId: string) {
@@ -19,7 +19,7 @@ export async function createProfile(archetypeId: string) {
     .insert({
       id: user.id,
       handle,
-      archetype: archetypeId
+      persona: archetypeId
     })
     .select()
     .single()
@@ -62,7 +62,7 @@ export async function getUserProfile(handle?: string) {
 
   const { data: threads } = await supabase
     .from('threads')
-    .select('*, comments(count), profiles!threads_author_id_fkey(handle, archetype)')
+    .select('*, comments(count), profiles!threads_author_id_fkey(handle, persona)')
     .eq('author_id', userProfile.id)
     .order('created_at', { ascending: false })
 

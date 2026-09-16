@@ -1,6 +1,6 @@
 import { Cpu, Flame, Search, Sword, Rocket, FlaskConical, Ghost, Megaphone, MessageSquare, Box, Eye, User, Pen, Smile, LucideIcon } from 'lucide-react';
 
-export interface Archetype {
+export interface Persona {
   id: string;
   name: string;
   icon: LucideIcon;
@@ -8,7 +8,7 @@ export interface Archetype {
   nouns: string[];
 }
 
-export const ARCHETYPES: Archetype[] = [
+export const PERSONAS: Persona[] = [
   { id: 'netrunner', name: 'Netrunner', icon: Cpu, adjectives: ['Neon', 'Cyber', 'Wired'], nouns: ['Deck', 'Grid', 'Synth'] },
   { id: 'cultist', name: 'Cultist', icon: Flame, adjectives: ['Dark', 'Ominous', 'Zealous'], nouns: ['Ritual', 'Altar', 'Chant'] },
   { id: 'detective', name: 'Detective', icon: Search, adjectives: ['Sleuth', 'Grim', 'Sharp'], nouns: ['Shadow', 'Lens', 'Trench'] },
@@ -25,11 +25,14 @@ export const ARCHETYPES: Archetype[] = [
   { id: 'jester', name: 'Jester', icon: Smile, adjectives: ['Funny', 'Wild', 'Crazy'], nouns: ['Joke', 'Fool', 'Hat'] }
 ];
 
-export function generateArchetypeHandle(archetypeId: string): string {
-  const arc = ARCHETYPES.find(a => a.id === archetypeId);
+export function generatePersonaHandle(personaId: string): string {
+  const arc = PERSONAS.find(a => a.id === personaId);
   if (!arc) return `Anon${Math.floor(Math.random() * 999)}`;
   const adj = arc.adjectives[Math.floor(Math.random() * arc.adjectives.length)];
   const noun = arc.nouns[Math.floor(Math.random() * arc.nouns.length)];
   const num = Math.floor(Math.random() * 100);
   return `${adj}${noun}${num}`;
 }
+
+export const generateArchetypeHandle = generatePersonaHandle
+

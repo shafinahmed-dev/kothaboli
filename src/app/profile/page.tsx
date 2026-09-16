@@ -1,5 +1,5 @@
 import { getUserProfile } from '@/app/actions/profile'
-import { ArchetypeAvatar } from '@/components/boards/ArchetypeAvatar'
+import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
 import { TagPill } from '@/components/boards/TagPill'
 import { Clock, Lock, ArrowLeft, TerminalSquare } from 'lucide-react'
 import { getTimeRemaining, formatInteractions } from '@/lib/utils'
@@ -32,7 +32,7 @@ export default async function ProfilePage() {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
           <div className="relative">
             <div className="absolute inset-0 bg-white/5 rounded-full blur-xl animate-pulse"></div>
-            <ArchetypeAvatar archetypeId={profile.archetype} className="w-24 h-24 md:w-28 md:h-28 text-5xl relative z-10 border-2 border-neutral-800" />
+            <PersonaAvatar archetypeId={profile.persona} className="w-24 h-24 md:w-28 md:h-28 text-5xl relative z-10 border-2 border-neutral-800" />
           </div>
           <div>
             <h1 className="text-3xl font-black text-white mb-2 tracking-tight">{profile.handle}</h1>
@@ -91,7 +91,7 @@ export default async function ProfilePage() {
                   </div>
                   <div className="shrink-0 flex items-center justify-center bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-2.5">
                     <span className="text-sm font-black text-neutral-400 tracking-wide">{formatInteractions(thread.total_interactions)}</span>
-                    <span className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest hidden sm:inline ml-1.5 mt-0.5">interlinks</span>
+                    <span className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest hidden sm:inline ml-1.5 mt-0.5">interactions</span>
                   </div>
                 </div>
               ))

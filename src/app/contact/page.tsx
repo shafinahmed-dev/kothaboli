@@ -16,7 +16,7 @@ export default function ContactPage() {
 
         <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 md:p-8 mt-4">
           <h2 className="text-xl font-bold text-white mb-2">Editorial & AdSense Inquiries</h2>
-          <p className="text-sm mb-4 text-neutral-400">For advertising opportunities, bug reports, or general archetype feedback.</p>
+          <p className="text-sm mb-4 text-neutral-400">For advertising opportunities, bug reports, or general persona feedback.</p>
           <a href="mailto:contact@kothaboli.com" className="font-mono text-blue-400 hover:text-blue-300 transition font-bold tracking-wide">contact@kothaboli.com</a>
         </div>
       </section>

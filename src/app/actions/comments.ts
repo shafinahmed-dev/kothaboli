@@ -73,18 +73,27 @@ export async function getThreadWithComments(threadId: string) {
     .from('threads')
     .select(`
       *,
-      profiles!threads_author_id_fkey(handle, archetype)
+      profiles!threads_author_id_fkey(handle, persona)
     `)
     .eq('id', threadId)
     .single()
     
   if (!thread) return null
 
+  // Increment view count asynchronously
+  const newViews = (thread.views || 0) + 1
+  thread.views = newViews
+  supabase
+    .from('threads')
+    .update({ views: newViews })
+    .eq('id', threadId)
+    .then()
+
   const { data: comments } = await supabase
     .from('comments')
     .select(`
       *,
-      profiles!comments_author_id_fkey(handle, archetype)
+      profiles!comments_author_id_fkey(handle, persona)
     `)
     .eq('thread_id', threadId)
     .order('created_at', { ascending: true })
