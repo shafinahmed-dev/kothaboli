@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { PersonaAvatar } from './PersonaAvatar'
 import { TagPill } from './TagPill'
 import { MessageSquare, Clock, Share, Eye } from 'lucide-react'
-import { getTimeAgo, getTimeRemaining } from '@/lib/utils'
+import { getTimeAgo, getTimeRemaining, getTimerUrgencyStyle, cn } from '@/lib/utils'
 
 export function ThreadCard({ thread }: { thread: any }) {
   const profile = thread.profiles || {}
@@ -42,7 +42,7 @@ export function ThreadCard({ thread }: { thread: any }) {
       </div>
 
       <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 flex-wrap">
-        <div className="flex items-center gap-1.5 text-orange-400/90 bg-orange-500/10 px-2.5 py-1 rounded-xl border border-orange-500/20">
+        <div className={cn("flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-xs font-bold transition-all", getTimerUrgencyStyle(thread.expires_at))}>
           <Clock className="w-3.5 h-3.5" />
           <span>{getTimeRemaining(thread.expires_at)} left</span>
         </div>

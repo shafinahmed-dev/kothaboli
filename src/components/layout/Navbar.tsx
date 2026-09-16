@@ -59,7 +59,7 @@ export function Navbar({ profile }: { profile: any }) {
               className="flex items-center gap-2 px-5 py-2 text-sm font-bold text-black bg-white rounded-full hover:bg-neutral-200 transition disabled:opacity-50"
             >
               {isSigningIn ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-              Sign in<span className="hidden sm:inline"> with Google</span>
+              Log In / Sign In
             </button>
           )}
         </nav>

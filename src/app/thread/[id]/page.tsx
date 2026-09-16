@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
 import { TagPill } from '@/components/boards/TagPill'
-import { getTimeAgo, getTimeRemaining } from '@/lib/utils'
+import { getTimeAgo, getTimeRemaining, getTimerUrgencyStyle, cn } from '@/lib/utils'
 import { CommentList } from '@/components/threads/CommentList'
 import { AdBanner } from '@/components/ads/AdBanner'
 import { ArrowLeft, Clock, MessageSquare, AlertCircle } from 'lucide-react'
@@ -56,9 +56,9 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-orange-400 bg-orange-500/10 px-3 py-1.5 rounded-xl border border-orange-500/20">
+            <div className={cn("flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all", isExpired ? 'border-neutral-800 text-neutral-500 bg-neutral-900/50' : getTimerUrgencyStyle(thread.expires_at))}>
               <Clock className="w-3.5 h-3.5" />
-              <span>{isExpired ? 'EXPIRED' : `${getTimeRemaining(thread.expires_at)}`}</span>
+              <span>{isExpired ? 'EXPIRED' : `${getTimeRemaining(thread.expires_at)} left`}</span>
             </div>
             <TagPill tag={thread.tag} nonInteractive className="bg-neutral-800 border border-neutral-700 text-neutral-300" />
           </div>

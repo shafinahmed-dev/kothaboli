@@ -26,6 +26,8 @@ export default async function Home({ searchParams }: PageProps) {
         <BoardFilter />
       </Suspense>
 
+      <CreateThreadModal isAuthenticated={!!user} />
+
       <div className="space-y-4">
         {threads.length > 0 ? (
           threads.map((thread, index) => (
@@ -46,8 +48,6 @@ export default async function Home({ searchParams }: PageProps) {
           </div>
         )}
       </div>
-
-      <CreateThreadModal isAuthenticated={!!user} />
     </div>
   )
 }

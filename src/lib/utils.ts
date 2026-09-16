@@ -34,3 +34,18 @@ export function getTimeAgo(createdAt: string) {
   if (minutes > 0) return `${minutes}m ago`
   return `just now`
 }
+
+export function getTimerUrgencyStyle(expiresAt: string) {
+  const diff = new Date(expiresAt).getTime() - new Date().getTime()
+  if (diff <= 0) {
+    return 'border-neutral-800 text-neutral-500 bg-neutral-900/50'
+  }
+  const hoursLeft = diff / (1000 * 60 * 60)
+  if (hoursLeft > 72) {
+    return 'border-sky-500/30 text-sky-400 bg-sky-950/20'
+  }
+  if (hoursLeft >= 24) {
+    return 'border-amber-500/40 text-amber-300 bg-amber-950/25'
+  }
+  return 'border-rose-500/60 text-rose-400 bg-rose-950/30 animate-pulse'
+}
