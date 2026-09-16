@@ -5,6 +5,11 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function formatInteractions(count: number): string {
+  if (count < 1000) return count.toString()
+  return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+}
+
 export function getTimeRemaining(expiresAt: string) {
   const diff = new Date(expiresAt).getTime() - new Date().getTime()
   if (diff <= 0) return 'Expired'
