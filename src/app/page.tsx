@@ -5,6 +5,8 @@ import { BoardFilter } from '@/components/boards/BoardFilter'
 import { ThreadCard } from '@/components/boards/ThreadCard'
 import { CreateThreadModal } from '@/components/boards/CreateThreadModal'
 import { Flame } from 'lucide-react'
+import { AdBanner } from '@/components/ads/AdBanner'
+import React from 'react'
 
 interface PageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -26,8 +28,13 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="space-y-4">
         {threads.length > 0 ? (
-          threads.map((thread) => (
-            <ThreadCard key={thread.id} thread={thread} />
+          threads.map((thread, index) => (
+            <React.Fragment key={thread.id}>
+              <ThreadCard thread={thread} />
+              {(index + 1) % 5 === 0 && index !== threads.length - 1 && (
+                <AdBanner />
+              )}
+            </React.Fragment>
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-neutral-800 rounded-2xl bg-neutral-900/40">
@@ -44,3 +51,4 @@ export default async function Home({ searchParams }: PageProps) {
     </div>
   )
 }
+

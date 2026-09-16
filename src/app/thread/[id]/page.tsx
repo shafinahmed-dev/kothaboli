@@ -6,6 +6,7 @@ import { ArchetypeAvatar } from '@/components/boards/ArchetypeAvatar'
 import { TagPill } from '@/components/boards/TagPill'
 import { getTimeAgo, getTimeRemaining } from '@/lib/utils'
 import { CommentList } from '@/components/threads/CommentList'
+import { AdBanner } from '@/components/ads/AdBanner'
 import { ArrowLeft, Clock, MessageSquare, AlertCircle } from 'lucide-react'
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
@@ -45,7 +46,7 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
         </div>
       )}
 
-      <article className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 mb-8 shadow-2xl">
+      <article className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 mb-4 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
             <ArchetypeAvatar archetypeId={profile.archetype} className="w-10 h-10 text-lg" />
@@ -79,6 +80,8 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
         </div>
       </article>
 
+      <AdBanner />
+
       <CommentList 
         threadId={thread.id} 
         comments={comments} 
@@ -88,3 +91,4 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
     </div>
   )
 }
+
