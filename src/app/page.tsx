@@ -41,7 +41,7 @@ export default async function Home({ searchParams }: PageProps) {
             <Flame className="w-12 h-12 text-neutral-700 mb-4" />
             <h3 className="text-lg font-bold text-slate-300">No active discussions</h3>
             <p className="text-slate-500 mt-2 max-w-sm text-sm font-medium">
-              The void is quiet. There are currently no active self-destructing threads in this sector.
+              No active discussions on this board yet. Be the first to start one!
             </p>
           </div>
         )}
