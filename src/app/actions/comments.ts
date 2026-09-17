@@ -66,8 +66,36 @@ export async function createComment({ threadId, parentId, body }: { threadId: st
   return comment
 }
 
+export async function toggleCommentLike(commentId: string) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('Unauthorized')
+
+  const { data: existing } = await supabase
+    .from('comment_likes')
+    .select('*')
+    .eq('comment_id', commentId)
+    .eq('user_id', user.id)
+    .maybeSingle()
+
+  if (existing) {
+    await supabase
+      .from('comment_likes')
+      .delete()
+      .eq('comment_id', commentId)
+      .eq('user_id', user.id)
+    return { liked: false }
+  } else {
+    await supabase
+      .from('comment_likes')
+      .insert({ comment_id: commentId, user_id: user.id })
+    return { liked: true }
+  }
+}
+
 export async function getThreadWithComments(threadId: string) {
   const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
   
   const { data: thread } = await supabase
     .from('threads')
@@ -93,10 +121,21 @@ export async function getThreadWithComments(threadId: string) {
     .from('comments')
     .select(`
       *,
-      profiles:author_id(handle, archetype)
+      profiles:author_id(handle, archetype),
+      comment_likes(user_id)
     `)
     .eq('thread_id', threadId)
     .order('created_at', { ascending: true })
 
-  return { thread, comments: comments || [] }
+  const formattedComments = (comments || []).map((c: any) => {
+    const likesCount = Array.isArray(c.comment_likes) ? c.comment_likes.length : 0
+    const isLikedByMe = user ? Array.isArray(c.comment_likes) && c.comment_likes.some((l: any) => l.user_id === user.id) : false
+    return {
+      ...c,
+      likes_count: likesCount,
+      is_liked: isLikedByMe
+    }
+  })
+
+  return { thread, comments: formattedComments }
 }

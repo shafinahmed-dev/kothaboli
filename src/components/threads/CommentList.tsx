@@ -51,7 +51,7 @@ export function CommentList({ threadId, comments, isExpired, isAuthenticated }: 
       <div className="space-y-4">
         <h3 className="text-xl font-bold flex items-center gap-2 text-white">
           <MessageSquare className="w-5 h-5 text-neutral-400" />
-          Intel & Replies
+          Opinions
         </h3>
         
         {!isExpired && isAuthenticated ? (

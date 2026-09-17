@@ -39,10 +39,13 @@ export async function getUserProfile(handle?: string) {
   let isOwnProfile = false
 
   if (handle) {
-    const { data } = await supabase.from('profiles').select('*').eq('handle', handle).single()
-    if (!data) throw new Error('Profile not found')
-    userProfile = data
-    const { data: { user } } = await supabase.auth.getUser()
+    const [profileRes, userRes] = await Promise.all([
+      supabase.from('profiles').select('*').eq('handle', handle).single(),
+      supabase.auth.getUser()
+    ])
+    if (!profileRes.data) throw new Error('Profile not found')
+    userProfile = profileRes.data
+    const user = userRes.data?.user
     if (user && user.id === userProfile.id) isOwnProfile = true
   } else {
     const { data: { user } } = await supabase.auth.getUser()

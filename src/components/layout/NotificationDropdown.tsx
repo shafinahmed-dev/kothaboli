@@ -26,7 +26,7 @@ export function NotificationDropdown() {
 
   useEffect(() => {
     fetchNotes()
-    const interval = setInterval(fetchNotes, 20000)
+    const interval = setInterval(fetchNotes, 60000)
     return () => clearInterval(interval)
   }, [])
 

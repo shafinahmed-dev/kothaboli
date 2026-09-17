@@ -33,8 +33,8 @@ export function Navbar({ profile }: { profile: any }) {
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-neutral-950/80 border-b border-neutral-800">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition group">
-          <span className="text-xl font-black tracking-tight text-white flex items-center gap-2">
-            KothaBoli <span className="text-neutral-500 font-medium">|</span> <span className="opacity-90 font-bold bg-gradient-to-r from-neutral-400 to-white bg-clip-text text-transparent">কথাবলি</span>
+          <span className="text-xl font-black tracking-tight text-white">
+            KothaBoli
           </span>
         </Link>
         

@@ -87,8 +87,6 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
         </div>
       </article>
 
-      <AdBanner />
-
       <CommentList 
         threadId={thread.id} 
         comments={comments} 

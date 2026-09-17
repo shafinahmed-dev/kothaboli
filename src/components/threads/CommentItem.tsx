@@ -3,16 +3,43 @@
 import { useState } from 'react'
 import { PersonaAvatar } from '../boards/PersonaAvatar'
 import { getTimeAgo } from '@/lib/utils'
-import { createComment } from '@/app/actions/comments'
+import { createComment, toggleCommentLike } from '@/app/actions/comments'
 import { useRouter } from 'next/navigation'
-import { Loader2, Reply } from 'lucide-react'
+import { Loader2, Reply, Heart } from 'lucide-react'
+import { createClient } from '@/lib/supabase/client'
 
 export function CommentItem({ comment, threadId, isExpired, isAuthenticated, depth = 0 }: { comment: any, threadId: string, isExpired: boolean, isAuthenticated: boolean, depth?: number }) {
   const profile = comment.profiles || {}
   const [isReplying, setIsReplying] = useState(false)
   const [replyBody, setReplyBody] = useState('')
   const [loading, setLoading] = useState(false)
+  const [isLiked, setIsLiked] = useState(!!comment.is_liked)
+  const [likesCount, setLikesCount] = useState(comment.likes_count || 0)
   const router = useRouter()
+  const supabase = createClient()
+
+  const handleLike = async () => {
+    if (!isAuthenticated) {
+      await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: `${window.location.origin}/auth/callback` },
+      })
+      return
+    }
+
+    const nextLiked = !isLiked
+    setIsLiked(nextLiked)
+    setLikesCount((prev: number) => (nextLiked ? prev + 1 : Math.max(0, prev - 1)))
+
+    try {
+      const res = await toggleCommentLike(comment.id)
+      setIsLiked(res.liked)
+    } catch (err) {
+      console.error(err)
+      setIsLiked(!nextLiked)
+      setLikesCount((prev: number) => (nextLiked ? Math.max(0, prev - 1) : prev + 1))
+    }
+  }
 
   const submitReply = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,12 +74,24 @@ export function CommentItem({ comment, threadId, isExpired, isAuthenticated, dep
           </div>
         </div>
         
-        <p className="text-sm text-neutral-300 whitespace-pre-wrap leading-relaxed font-medium">
+        <p className="text-sm text-neutral-300 whitespace-pre-wrap leading-relaxed font-medium mb-3">
           {comment.body}
         </p>
 
-        {!isExpired && isAuthenticated && (
-          <div className="mt-3 flex">
+        <div className="flex items-center gap-4 text-xs font-bold">
+          <button 
+            onClick={handleLike}
+            className={`flex items-center gap-1.5 transition ${
+              isLiked 
+                ? 'text-rose-500 font-black' 
+                : 'text-neutral-500 hover:text-rose-400'
+            }`}
+          >
+            <Heart className={`w-4 h-4 transition-all ${isLiked ? 'fill-rose-500 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] scale-110' : ''}`} />
+            <span>{likesCount > 0 ? likesCount : ''}</span>
+          </button>
+
+          {!isExpired && isAuthenticated && (
             <button 
               onClick={() => setIsReplying(!isReplying)}
               className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition"
@@ -60,8 +99,8 @@ export function CommentItem({ comment, threadId, isExpired, isAuthenticated, dep
               <Reply className="w-3.5 h-3.5" />
               Reply
             </button>
-          </div>
-        )}
+          )}
+        </div>
 
         {isReplying && (
           <form onSubmit={submitReply} className="mt-4">

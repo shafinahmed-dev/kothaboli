@@ -24,21 +24,38 @@ export const BOARDS: Board[] = [
   { id: 'kb_news', name: 'News', icon: Newspaper, color: 'cyan' }
 ];
 
-export const BOARD_NEON_STYLES: Record<string, string> = {
-  kb_corporate: 'border-blue-400 text-blue-400 hover:bg-blue-950/40 hover:shadow-[0_0_12px_rgba(96,165,250,0.3)]',
-  kb_money: 'border-emerald-400 text-emerald-400 hover:bg-emerald-950/40 hover:shadow-[0_0_12px_rgba(52,211,153,0.3)]',
-  kb_academia: 'border-indigo-400 text-indigo-400 hover:bg-indigo-950/40 hover:shadow-[0_0_12px_rgba(129,140,248,0.3)]',
-  kb_abroad: 'border-sky-400 text-sky-400 hover:bg-sky-950/40 hover:shadow-[0_0_12px_rgba(56,189,248,0.3)]',
-  kb_vent: 'border-purple-400 text-purple-400 hover:bg-purple-950/40 hover:shadow-[0_0_12px_rgba(192,132,252,0.3)]',
-  kb_advice: 'border-amber-400 text-amber-400 hover:bg-amber-950/40 hover:shadow-[0_0_12px_rgba(251,191,36,0.3)]',
-  kb_relationship: 'border-rose-400 text-rose-400 hover:bg-rose-950/40 hover:shadow-[0_0_12px_rgba(251,113,133,0.3)]',
-  kb_family: 'border-teal-400 text-teal-400 hover:bg-teal-950/40 hover:shadow-[0_0_12px_rgba(45,212,191,0.3)]',
-  kb_stories: 'border-fuchsia-400 text-fuchsia-400 hover:bg-fuchsia-950/40 hover:shadow-[0_0_12px_rgba(232,121,249,0.3)]',
-  kb_horror: 'border-violet-400 text-violet-400 hover:bg-violet-950/40 hover:shadow-[0_0_12px_rgba(167,139,250,0.3)]',
-  kb_culture: 'border-pink-400 text-pink-400 hover:bg-pink-950/40 hover:shadow-[0_0_12px_rgba(244,114,182,0.3)]',
-  kb_humor: 'border-yellow-400 text-yellow-400 hover:bg-yellow-950/40 hover:shadow-[0_0_12px_rgba(250,204,21,0.3)]',
-  kb_politics: 'border-orange-400 text-orange-400 hover:bg-orange-950/40 hover:shadow-[0_0_12px_rgba(251,146,60,0.3)]',
-  kb_news: 'border-cyan-400 text-cyan-400 hover:bg-cyan-950/40 hover:shadow-[0_0_12px_rgba(34,211,238,0.3)]',
+export const BOARD_NEON_HOVER_STYLES: Record<string, string> = {
+  kb_corporate: 'hover:border-blue-400 hover:text-blue-400 hover:bg-blue-950/40 hover:shadow-[0_0_12px_rgba(96,165,250,0.3)]',
+  kb_money: 'hover:border-emerald-400 hover:text-emerald-400 hover:bg-emerald-950/40 hover:shadow-[0_0_12px_rgba(52,211,153,0.3)]',
+  kb_academia: 'hover:border-indigo-400 hover:text-indigo-400 hover:bg-indigo-950/40 hover:shadow-[0_0_12px_rgba(129,140,248,0.3)]',
+  kb_abroad: 'hover:border-sky-400 hover:text-sky-400 hover:bg-sky-950/40 hover:shadow-[0_0_12px_rgba(56,189,248,0.3)]',
+  kb_vent: 'hover:border-purple-400 hover:text-purple-400 hover:bg-purple-950/40 hover:shadow-[0_0_12px_rgba(192,132,252,0.3)]',
+  kb_advice: 'hover:border-amber-400 hover:text-amber-400 hover:bg-amber-950/40 hover:shadow-[0_0_12px_rgba(251,191,36,0.3)]',
+  kb_relationship: 'hover:border-rose-400 hover:text-rose-400 hover:bg-rose-950/40 hover:shadow-[0_0_12px_rgba(251,113,133,0.3)]',
+  kb_family: 'hover:border-teal-400 hover:text-teal-400 hover:bg-teal-950/40 hover:shadow-[0_0_12px_rgba(45,212,191,0.3)]',
+  kb_stories: 'hover:border-fuchsia-400 hover:text-fuchsia-400 hover:bg-fuchsia-950/40 hover:shadow-[0_0_12px_rgba(232,121,249,0.3)]',
+  kb_horror: 'hover:border-violet-400 hover:text-violet-400 hover:bg-violet-950/40 hover:shadow-[0_0_12px_rgba(167,139,250,0.3)]',
+  kb_culture: 'hover:border-pink-400 hover:text-pink-400 hover:bg-pink-950/40 hover:shadow-[0_0_12px_rgba(244,114,182,0.3)]',
+  kb_humor: 'hover:border-yellow-400 hover:text-yellow-400 hover:bg-yellow-950/40 hover:shadow-[0_0_12px_rgba(250,204,21,0.3)]',
+  kb_politics: 'hover:border-orange-400 hover:text-orange-400 hover:bg-orange-950/40 hover:shadow-[0_0_12px_rgba(251,146,60,0.3)]',
+  kb_news: 'hover:border-cyan-400 hover:text-cyan-400 hover:bg-cyan-950/40 hover:shadow-[0_0_12px_rgba(34,211,238,0.3)]',
+}
+
+export const BOARD_NEON_ACTIVE_STYLES: Record<string, string> = {
+  kb_corporate: 'border-blue-400 text-blue-400 bg-blue-950/50 shadow-[0_0_14px_rgba(96,165,250,0.4)]',
+  kb_money: 'border-emerald-400 text-emerald-400 bg-emerald-950/50 shadow-[0_0_14px_rgba(52,211,153,0.4)]',
+  kb_academia: 'border-indigo-400 text-indigo-400 bg-indigo-950/50 shadow-[0_0_14px_rgba(129,140,248,0.4)]',
+  kb_abroad: 'border-sky-400 text-sky-400 bg-sky-950/50 shadow-[0_0_14px_rgba(56,189,248,0.4)]',
+  kb_vent: 'border-purple-400 text-purple-400 bg-purple-950/50 shadow-[0_0_14px_rgba(192,132,252,0.4)]',
+  kb_advice: 'border-amber-400 text-amber-400 bg-amber-950/50 shadow-[0_0_14px_rgba(251,191,36,0.4)]',
+  kb_relationship: 'border-rose-400 text-rose-400 bg-rose-950/50 shadow-[0_0_14px_rgba(251,113,133,0.4)]',
+  kb_family: 'border-teal-400 text-teal-400 bg-teal-950/50 shadow-[0_0_14px_rgba(45,212,191,0.4)]',
+  kb_stories: 'border-fuchsia-400 text-fuchsia-400 bg-fuchsia-950/50 shadow-[0_0_14px_rgba(232,121,249,0.4)]',
+  kb_horror: 'border-violet-400 text-violet-400 bg-violet-950/50 shadow-[0_0_14px_rgba(167,139,250,0.4)]',
+  kb_culture: 'border-pink-400 text-pink-400 bg-pink-950/50 shadow-[0_0_14px_rgba(244,114,182,0.4)]',
+  kb_humor: 'border-yellow-400 text-yellow-400 bg-yellow-950/50 shadow-[0_0_14px_rgba(250,204,21,0.4)]',
+  kb_politics: 'border-orange-400 text-orange-400 bg-orange-950/50 shadow-[0_0_14px_rgba(251,146,60,0.4)]',
+  kb_news: 'border-cyan-400 text-cyan-400 bg-cyan-950/50 shadow-[0_0_14px_rgba(34,211,238,0.4)]',
 }
 
 

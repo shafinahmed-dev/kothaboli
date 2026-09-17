@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { PersonaModal } from '@/components/layout/PersonaModal'
 
 export const metadata: Metadata = {
-  title: 'KothaBoli | কথাবলি',
+  title: 'KothaBoli',
   description: 'Anonymous tech community',
 }
 

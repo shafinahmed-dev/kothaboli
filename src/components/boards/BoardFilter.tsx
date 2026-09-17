@@ -1,6 +1,6 @@
 'use client'
 
-import { BOARDS, BOARD_NEON_STYLES } from '@/lib/constants/boards'
+import { BOARDS, BOARD_NEON_HOVER_STYLES, BOARD_NEON_ACTIVE_STYLES } from '@/lib/constants/boards'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Layers } from 'lucide-react'
@@ -17,7 +17,7 @@ export function BoardFilter() {
           className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all border ${
             currentTag === 'all' 
               ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105' 
-              : 'bg-neutral-900/90 border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-600 hover:bg-neutral-800/80'
+              : 'bg-neutral-900/80 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 hover:bg-neutral-800/80'
           }`}
         >
           <Layers className="w-4 h-4 shrink-0" />
@@ -26,7 +26,8 @@ export function BoardFilter() {
         {BOARDS.map(board => {
           const isActive = currentTag === board.id
           const Icon = board.icon
-          const neonStyle = BOARD_NEON_STYLES[board.id] || 'border-blue-400 text-blue-400 hover:bg-blue-950/40 hover:shadow-[0_0_12px_rgba(96,165,250,0.3)]'
+          const neonHover = BOARD_NEON_HOVER_STYLES[board.id] || 'hover:border-blue-400 hover:text-blue-400'
+          const neonActive = BOARD_NEON_ACTIVE_STYLES[board.id] || 'border-blue-400 text-blue-400 bg-blue-950/50'
 
           return (
             <Link 
@@ -34,8 +35,8 @@ export function BoardFilter() {
               href={`/?tag=${board.id}`} 
               className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl transition-all border ${
                 isActive 
-                  ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105 font-extrabold' 
-                  : `bg-neutral-950/80 ${neonStyle}`
+                  ? `${neonActive} scale-105 font-extrabold` 
+                  : `bg-neutral-900/80 border-neutral-800 text-neutral-400 hover:text-white ${neonHover}`
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />

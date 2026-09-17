@@ -76,7 +76,7 @@ export function CreateThreadModal({ isAuthenticated }: { isAuthenticated: boolea
               <Plus className="w-5 h-5" />
             </div>
             <span className="text-sm md:text-base font-medium text-neutral-400 group-hover:text-slate-200 transition">
-              What's strictly on your mind? Start a thread...
+              Have something to share? Start a thread...
             </span>
           </div>
           <span className="px-4 py-2.5 rounded-xl bg-white text-black font-extrabold text-xs md:text-sm hover:bg-neutral-200 transition shadow-sm group-hover:scale-105 shrink-0">

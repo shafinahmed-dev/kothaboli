@@ -28,7 +28,6 @@ export async function markNotificationsAsRead() {
     .from('notifications')
     .update({ is_read: true })
     .eq('recipient_id', user.id)
-    .eq('is_read', false)
 
   revalidatePath('/', 'layout')
 }

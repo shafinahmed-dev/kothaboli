@@ -30,13 +30,8 @@ export default async function Home({ searchParams }: PageProps) {
 
       <div className="space-y-4">
         {threads.length > 0 ? (
-          threads.map((thread, index) => (
-            <React.Fragment key={thread.id}>
-              <ThreadCard thread={thread} />
-              {(index + 1) % 5 === 0 && index !== threads.length - 1 && (
-                <AdBanner />
-              )}
-            </React.Fragment>
+          threads.map((thread) => (
+            <ThreadCard key={thread.id} thread={thread} />
           ))
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-neutral-800 rounded-2xl bg-neutral-900/40">

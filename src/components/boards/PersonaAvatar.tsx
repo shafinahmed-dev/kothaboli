@@ -1,4 +1,4 @@
-import { PERSONAS } from '@/lib/constants/personas'
+import { PERSONAS, normalizePersonaId } from '@/lib/constants/personas'
 import { User } from 'lucide-react'
 
 export function PersonaAvatar({ 
@@ -12,8 +12,9 @@ export function PersonaAvatar({
   profile?: any;
   className?: string 
 }) {
-  const targetId = personaId || archetypeId || profile?.archetype || profile?.persona || 'netrunner'
-  const arch = PERSONAS.find((a) => a.id === targetId || a.id?.toLowerCase() === targetId?.toLowerCase())
+  const targetId = personaId || archetypeId || profile?.archetype || profile?.persona
+  const resolvedId = normalizePersonaId(targetId)
+  const arch = PERSONAS.find((a) => a.id === resolvedId)
   const Icon = arch?.icon || User
   
   return (
@@ -24,5 +25,6 @@ export function PersonaAvatar({
 }
 
 export const ArchetypeAvatar = PersonaAvatar
+
 
 

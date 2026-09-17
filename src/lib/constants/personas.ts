@@ -25,8 +25,16 @@ export const PERSONAS: Persona[] = [
   { id: 'jester', name: 'Jester', icon: Smile, adjectives: ['Funny', 'Wild', 'Crazy'], nouns: ['Joke', 'Fool', 'Hat'] }
 ];
 
+export function normalizePersonaId(id?: string | null): string {
+  if (!id) return 'netrunner';
+  const clean = String(id).toLowerCase().replace(/^the\s+/, '').replace(/[^a-z0-9]/g, '');
+  const match = PERSONAS.find(p => p.id === clean || p.name.toLowerCase().replace(/[^a-z0-9]/g, '') === clean);
+  return match ? match.id : 'netrunner';
+}
+
 export function generatePersonaHandle(personaId: string): string {
-  const arc = PERSONAS.find(a => a.id === personaId);
+  const normalizedId = normalizePersonaId(personaId);
+  const arc = PERSONAS.find(a => a.id === normalizedId);
   if (!arc) return `Anon${Math.floor(Math.random() * 999)}`;
   const adj = arc.adjectives[Math.floor(Math.random() * arc.adjectives.length)];
   const noun = arc.nouns[Math.floor(Math.random() * arc.nouns.length)];
@@ -35,4 +43,5 @@ export function generatePersonaHandle(personaId: string): string {
 }
 
 export const generateArchetypeHandle = generatePersonaHandle
+
 
