@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Footer() {
   return (
@@ -6,9 +7,18 @@ export function Footer() {
       <div className="container mx-auto px-4 py-10 md:py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <span className="text-xl font-black tracking-tight text-white mb-2">
-              KothaBoli
-            </span>
+            <div className="flex items-center gap-2.5 mb-2">
+              <Image 
+                src="/logo.png" 
+                alt="KothaBoli" 
+                width={24} 
+                height={24} 
+                className="w-6 h-6 object-contain" 
+              />
+              <span className="text-xl font-black tracking-tight text-white">
+                KothaBoli
+              </span>
+            </div>
             <p className="text-xs text-neutral-500 font-bold tracking-wide">The HQ of Yappers!</p>
           </div>
 

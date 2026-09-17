@@ -8,6 +8,12 @@ import { PersonaModal } from '@/components/layout/PersonaModal'
 export const metadata: Metadata = {
   title: 'KothaBoli',
   description: 'Anonymous tech community',
+  icons: {
+    icon: [
+      { url: '/logo.png', sizes: 'any' },
+    ],
+    apple: '/logo.png',
+  },
 }
 
 export default async function RootLayout({

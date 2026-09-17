@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
@@ -32,8 +33,16 @@ export function Navbar({ profile }: { profile: any }) {
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-neutral-950/80 border-b border-neutral-800">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition group">
-          <span className="text-xl font-black tracking-tight text-white">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <Image 
+            src="/logo.png" 
+            alt="KothaBoli" 
+            width={32} 
+            height={32} 
+            priority 
+            className="w-8 h-8 object-contain transition-transform duration-150 group-hover:scale-105" 
+          />
+          <span className="font-bold text-xl tracking-tight text-white group-hover:text-neutral-200 transition-colors">
             KothaBoli
           </span>
         </Link>
