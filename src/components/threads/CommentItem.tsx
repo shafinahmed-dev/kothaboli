@@ -39,7 +39,7 @@ export function CommentItem({ comment, threadId, isExpired, isAuthenticated, dep
       <div className="bg-neutral-900/20 border border-neutral-800/50 rounded-xl p-4 transition-colors hover:bg-neutral-900/40">
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center gap-2">
-            <PersonaAvatar archetypeId={profile.persona} className="w-6 h-6 text-xs" />
+            <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-6 h-6 text-xs" />
             <span className="text-sm font-bold text-slate-300">{profile.handle}</span>
             <span className="text-xs text-neutral-600 font-bold whitespace-nowrap">
               {getTimeAgo(comment.created_at)}

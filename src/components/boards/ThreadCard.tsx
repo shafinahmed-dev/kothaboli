@@ -27,7 +27,7 @@ export function ThreadCard({ thread }: { thread: any }) {
     <Link href={`/thread/${thread.id}`} className="block w-full p-4 md:p-5 rounded-3xl bg-neutral-900/50 border border-neutral-800/80 hover:border-neutral-700 transition group mb-4 shadow-lg backdrop-blur-sm">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
-          <PersonaAvatar archetypeId={profile.persona} className="w-8 h-8 text-sm" />
+          <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-8 h-8 text-sm" />
           <div>
             <div className="text-sm font-bold text-slate-200">{profile.handle}</div>
             <div className="text-xs text-neutral-500 font-medium">{getTimeAgo(thread.created_at)}</div>

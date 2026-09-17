@@ -73,7 +73,7 @@ export async function getThreadWithComments(threadId: string) {
     .from('threads')
     .select(`
       *,
-      profiles!threads_author_id_fkey(handle, persona)
+      profiles:author_id(handle, archetype)
     `)
     .eq('id', threadId)
     .single()
@@ -93,7 +93,7 @@ export async function getThreadWithComments(threadId: string) {
     .from('comments')
     .select(`
       *,
-      profiles!comments_author_id_fkey(handle, persona)
+      profiles:author_id(handle, archetype)
     `)
     .eq('thread_id', threadId)
     .order('created_at', { ascending: true })

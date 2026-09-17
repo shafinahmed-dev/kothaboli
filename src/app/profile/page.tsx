@@ -32,7 +32,7 @@ export default async function ProfilePage() {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-center md:text-left">
           <div className="relative">
             <div className="absolute inset-0 bg-white/5 rounded-full blur-xl animate-pulse"></div>
-            <PersonaAvatar archetypeId={profile.persona} className="w-24 h-24 md:w-28 md:h-28 text-5xl relative z-10 border-2 border-neutral-800" />
+            <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-24 h-24 md:w-28 md:h-28 text-5xl relative z-10 border-2 border-neutral-800" />
           </div>
           <div>
             <h1 className="text-3xl font-black text-white mb-2 tracking-tight">{profile.handle}</h1>

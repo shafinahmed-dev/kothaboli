@@ -49,7 +49,7 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
       <article className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 mb-4 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
-            <PersonaAvatar archetypeId={profile.persona} className="w-10 h-10 text-lg" />
+            <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-10 h-10 text-lg" />
             <div>
               <div className="text-base font-bold text-slate-200">{profile.handle}</div>
               <div className="text-xs text-neutral-500 font-bold">{getTimeAgo(thread.created_at)}</div>

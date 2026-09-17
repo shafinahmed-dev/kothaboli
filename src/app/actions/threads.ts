@@ -60,7 +60,7 @@ export async function getThreads(tag?: string) {
     .from('threads')
     .select(`
       *,
-      profiles!threads_author_id_fkey(handle, persona),
+      profiles:author_id(handle, archetype),
       comments(count)
     `)
     .eq('is_expired', false)
@@ -73,7 +73,7 @@ export async function getThreads(tag?: string) {
   const { data, error } = await query
 
   if (error) {
-    console.error(error)
+    console.error('getThreads error details:', JSON.stringify(error, null, 2), error.message, error.details, error.hint);
     return []
   }
 

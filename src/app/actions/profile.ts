@@ -19,7 +19,7 @@ export async function createProfile(archetypeId: string) {
     .insert({
       id: user.id,
       handle,
-      persona: archetypeId
+      archetype: archetypeId
     })
     .select()
     .single()
@@ -62,7 +62,7 @@ export async function getUserProfile(handle?: string) {
 
   const { data: threads } = await supabase
     .from('threads')
-    .select('*, comments(count), profiles!threads_author_id_fkey(handle, persona)')
+    .select('*, comments(count), profiles:author_id(handle, archetype)')
     .eq('author_id', userProfile.id)
     .order('created_at', { ascending: false })
 
