@@ -4,7 +4,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { PersonaAvatar } from './PersonaAvatar'
 import { TagPill } from './TagPill'
-import { Clock, Share } from 'lucide-react'
+import { ShareButton } from '../threads/ShareButton'
+import { Clock } from 'lucide-react'
 import { getTimeAgo, getTimeRemaining, getTimerUrgencyStyle, cn } from '@/lib/utils'
 
 export function ThreadCard({ thread }: { thread: any }) {
@@ -20,14 +21,6 @@ export function ThreadCard({ thread }: { thread: any }) {
 
   const handleCardClick = (e: React.MouseEvent) => {
     router.push(`/thread/${thread.id}`)
-  }
-
-  const handleShare = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    if (typeof window !== 'undefined') {
-      navigator.clipboard.writeText(`${window.location.origin}/thread/${thread.id}`)
-    }
   }
 
   return (
@@ -81,10 +74,9 @@ export function ThreadCard({ thread }: { thread: any }) {
         </div>
         <span>🔥 {viewsCount} views</span>
         <span>💬 {repliesCount} comments</span>
-        <button onClick={handleShare} className="flex flex-1 justify-end items-center gap-1.5 hover:text-white transition-colors duration-150 text-neutral-400">
-          <Share className="w-4 h-4" />
-          Share
-        </button>
+        <div className="flex flex-1 justify-end">
+          <ShareButton threadId={thread.id} title={thread.title} className="flex items-center gap-1.5 hover:text-white transition-colors duration-150 text-neutral-400 cursor-pointer" />
+        </div>
       </div>
     </div>
   )

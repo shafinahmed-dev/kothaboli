@@ -6,6 +6,7 @@ import { PersonaAvatar } from '@/components/boards/PersonaAvatar'
 import { TagPill } from '@/components/boards/TagPill'
 import { getTimeAgo, getTimeRemaining, getTimerUrgencyStyle, cn } from '@/lib/utils'
 import { CommentList } from '@/components/threads/CommentList'
+import { ShareButton } from '@/components/threads/ShareButton'
 import { AdBanner } from '@/components/ads/AdBanner'
 import { ArrowLeft, Clock, MessageSquare, AlertCircle } from 'lucide-react'
 
@@ -100,6 +101,11 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
               💬 {comments.length} comments
             </span>
           </div>
+          <ShareButton 
+            threadId={thread.id} 
+            title={thread.title} 
+            className="flex items-center gap-1.5 bg-neutral-950 px-3.5 py-1.5 rounded-xl border border-neutral-800 hover:border-neutral-700 hover:text-white transition-colors duration-150 cursor-pointer" 
+          />
         </div>
       </article>
 
