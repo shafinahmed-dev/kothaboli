@@ -75,26 +75,32 @@ export default async function ProfilePage() {
           
           <div className="space-y-4">
             {past.length > 0 ? (
-              past.map(thread => (
-                <div key={thread.id} className="p-5 rounded-2xl bg-neutral-900/20 border border-neutral-800 flex items-center justify-between gap-4">
-                  <div className="flex flex-col gap-3 min-w-0 flex-1">
-                    <div className="flex items-center gap-3">
-                      <TagPill tag={thread.tag} nonInteractive className="bg-neutral-800 text-neutral-400 border border-neutral-700" />
-                      <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-bold text-red-400/90 bg-red-500/10 px-2 py-1 rounded-md uppercase tracking-wider">
-                        <Lock className="w-3" />
-                        Purged
+              past.map(thread => {
+                const commentCount = thread.comment_count ?? (Array.isArray(thread.comments) ? (thread.comments[0]?.count || 0) : (thread.comments?.count || 0))
+                const viewsCount = thread.views || 0
+
+                return (
+                  <div key={thread.id} className="p-5 rounded-2xl bg-neutral-900/30 border border-neutral-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 backdrop-blur-sm">
+                    <div className="flex flex-col gap-2 min-w-0 flex-1">
+                      <div className="flex items-center gap-3">
+                        <TagPill tag={thread.tag} nonInteractive />
+                        <div className="flex items-center gap-1.5 text-[10px] font-extrabold text-red-400 bg-red-950/40 px-2.5 py-1 rounded-lg border border-red-500/30 uppercase tracking-wider">
+                          <Lock className="w-3 h-3" />
+                          Purged & Locked
+                        </div>
+                      </div>
+                      <div className="text-base font-bold text-neutral-400 truncate line-through decoration-neutral-600 decoration-2">
+                        {thread.title}
                       </div>
                     </div>
-                    <div className="text-base font-bold text-neutral-500 truncate line-through decoration-neutral-700 decoration-2">
-                       {thread.title}
+                    <div className="shrink-0 flex items-center gap-3 bg-neutral-950/90 border border-neutral-800 rounded-xl px-4 py-2.5 text-xs font-bold text-neutral-300 shadow-inner">
+                      <span>🔥 {viewsCount} views</span>
+                      <span className="text-neutral-600">•</span>
+                      <span>💬 {commentCount} comments</span>
                     </div>
                   </div>
-                  <div className="shrink-0 flex items-center justify-center bg-neutral-950 border border-neutral-800 rounded-xl px-4 py-2.5">
-                    <span className="text-sm font-black text-neutral-400 tracking-wide">{formatInteractions(thread.total_interactions)}</span>
-                    <span className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest hidden sm:inline ml-1.5 mt-0.5">interactions</span>
-                  </div>
-                </div>
-              ))
+                )
+              })
             ) : (
               <div className="p-8 text-center rounded-2xl bg-neutral-900/20 border border-neutral-800 border-dashed">
                 <p className="text-neutral-600 font-bold uppercase tracking-wider text-sm">No archived discussions yet.</p>

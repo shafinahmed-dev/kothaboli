@@ -18,6 +18,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 export default async function ThreadPage({ params }: { params: Promise<{ id: string }> }) {
   const resolved = await params
   const threadId = resolved.id
+
+  const supabase = await createClient()
+  await supabase.rpc('increment_thread_views', { target_thread_id: threadId })
+
   const data = await getThreadWithComments(threadId)
   
   if (!data) notFound()
@@ -25,7 +29,6 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
   const { thread, comments } = data
   const profile = thread.profiles || {}
 
-  const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   const isAuthenticated = !!user
 

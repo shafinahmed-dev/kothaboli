@@ -4,22 +4,25 @@ import { User } from 'lucide-react'
 export function PersonaAvatar({ 
   personaId, 
   archetypeId, 
+  profile,
   className 
 }: { 
   personaId?: string; 
   archetypeId?: string; 
+  profile?: any;
   className?: string 
 }) {
-  const targetId = personaId || archetypeId
-  const arch = PERSONAS.find((a) => a.id === targetId)
+  const targetId = personaId || archetypeId || profile?.archetype || profile?.persona || 'netrunner'
+  const arch = PERSONAS.find((a) => a.id === targetId || a.id?.toLowerCase() === targetId?.toLowerCase())
   const Icon = arch?.icon || User
   
   return (
-    <div className={`flex items-center justify-center rounded-full bg-neutral-900 text-slate-100 ${className}`}>
+    <div className={`flex items-center justify-center rounded-full bg-neutral-900 text-slate-100 shrink-0 ${className || ''}`}>
       <Icon className="w-1/2 h-1/2" />
     </div>
   )
 }
 
 export const ArchetypeAvatar = PersonaAvatar
+
 

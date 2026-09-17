@@ -1,6 +1,6 @@
 'use client'
 
-import { BOARDS } from '@/lib/constants/boards'
+import { BOARDS, BOARD_NEON_STYLES } from '@/lib/constants/boards'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Layers } from 'lucide-react'
@@ -11,33 +11,35 @@ export function BoardFilter() {
 
   return (
     <div className="w-full mb-6">
-      <div className="flex flex-wrap items-center gap-2 p-2 bg-neutral-900/60 border border-neutral-800/80 rounded-2xl backdrop-blur-md">
+      <div className="flex flex-wrap items-center justify-center gap-2 p-3 bg-neutral-900/80 border border-neutral-800/80 rounded-2xl backdrop-blur-md shadow-xl">
         <Link 
           href="/" 
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider rounded-xl transition-all ${
+          className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all border ${
             currentTag === 'all' 
-              ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
-              : 'bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 hover:bg-neutral-800'
+              ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105' 
+              : 'bg-neutral-900/90 border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-600 hover:bg-neutral-800/80'
           }`}
         >
-          <Layers className="w-3.5 h-3.5" />
+          <Layers className="w-4 h-4 shrink-0" />
           All Boards
         </Link>
         {BOARDS.map(board => {
           const isActive = currentTag === board.id
           const Icon = board.icon
+          const neonStyle = BOARD_NEON_STYLES[board.id] || 'border-blue-400 text-blue-400 hover:bg-blue-950/40 hover:shadow-[0_0_12px_rgba(96,165,250,0.3)]'
+
           return (
             <Link 
               key={board.id}
               href={`/?tag=${board.id}`} 
-              className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
+              className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl transition-all border ${
                 isActive 
-                  ? 'bg-white text-black shadow-[0_0_15px_rgba(255,255,255,0.3)]' 
-                  : 'bg-neutral-900 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700 hover:bg-neutral-800'
+                  ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105 font-extrabold' 
+                  : `bg-neutral-950/80 ${neonStyle}`
               }`}
             >
-              <Icon className="w-3.5 h-3.5" />
-              {board.name}
+              <Icon className="w-4 h-4 shrink-0" />
+              <span>{board.name}</span>
             </Link>
           )
         })}

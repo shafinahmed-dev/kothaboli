@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { PersonaAvatar } from './PersonaAvatar'
 import { TagPill } from './TagPill'
-import { MessageSquare, Clock, Share, Eye } from 'lucide-react'
+import { Clock, Share } from 'lucide-react'
 import { getTimeAgo, getTimeRemaining, getTimerUrgencyStyle, cn } from '@/lib/utils'
 
 export function ThreadCard({ thread }: { thread: any }) {
@@ -41,20 +41,14 @@ export function ThreadCard({ thread }: { thread: any }) {
         <p className="text-sm text-neutral-400 line-clamp-3 whitespace-pre-wrap leading-relaxed">{thread.body}</p>
       </div>
 
-      <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 flex-wrap">
+      <div className="flex items-center gap-4 text-xs font-semibold text-neutral-400 flex-wrap">
         <div className={cn("flex items-center gap-1.5 px-2.5 py-1 rounded-xl border text-xs font-bold transition-all", getTimerUrgencyStyle(thread.expires_at))}>
           <Clock className="w-3.5 h-3.5" />
           <span>{getTimeRemaining(thread.expires_at)} left</span>
         </div>
-        <div className="flex items-center gap-1.5 text-neutral-400">
-          <Eye className="w-3.5 h-3.5 text-neutral-500" />
-          <span>🔥 {viewsCount} views</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-neutral-400">
-          <MessageSquare className="w-3.5 h-3.5 text-neutral-500" />
-          <span>💬 {repliesCount} comments</span>
-        </div>
-        <button onClick={handleShare} className="flex flex-1 justify-end items-center gap-1.5 hover:text-white transition-colors">
+        <span>🔥 {viewsCount} views</span>
+        <span>💬 {repliesCount} comments</span>
+        <button onClick={handleShare} className="flex flex-1 justify-end items-center gap-1.5 hover:text-white transition-colors text-neutral-400">
           <Share className="w-4 h-4" />
           Share
         </button>
