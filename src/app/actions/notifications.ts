@@ -24,10 +24,8 @@ export async function markNotificationsAsRead() {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return
 
-  await supabase
-    .from('notifications')
-    .update({ is_read: true })
-    .eq('recipient_id', user.id)
+  const { error } = await supabase.from('notifications').update({ is_read: true }).eq('recipient_id', user.id);
+  if (error) console.error('Error marking read:', error);
 
   revalidatePath('/', 'layout')
 }

@@ -34,11 +34,12 @@ export function NotificationDropdown() {
     setIsOpen(!isOpen)
   }
 
-  const handleMarkRead = async () => {
+  const handleMarkRead = async (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation()
+    setUnreadCount(0)
+    setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })))
     try {
       await markNotificationsAsRead()
-      setUnreadCount(0)
-      setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })))
     } catch (err) {
       console.error(err)
     }
@@ -48,7 +49,7 @@ export function NotificationDropdown() {
     <div className="relative">
       <button 
         onClick={handleOpen}
-        className="relative flex items-center justify-center p-2 text-neutral-400 hover:text-white transition rounded-full hover:bg-neutral-800"
+        className="relative flex items-center justify-center p-2 text-neutral-400 hover:text-white transition-colors duration-150 rounded-full hover:bg-neutral-800"
       >
         <Bell className="w-5 h-5" />
         {unreadCount > 0 && (
@@ -59,13 +60,13 @@ export function NotificationDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden transform opacity-100 scale-100 transition-all origin-top-right">
+        <div className="absolute right-0 mt-2 w-72 sm:w-80 bg-neutral-900 border border-neutral-800 rounded-2xl shadow-2xl z-50 overflow-hidden transform opacity-100 scale-100 transition-all duration-150 origin-top-right">
           <div className="p-3 border-b border-neutral-800 flex items-center justify-between bg-neutral-950/80 backdrop-blur">
             <h4 className="text-[11px] uppercase tracking-widest font-extrabold text-neutral-400">Notifications</h4>
             {unreadCount > 0 && (
               <button 
                 onClick={handleMarkRead}
-                className="text-[11px] font-bold text-blue-400 hover:text-blue-300 uppercase tracking-widest flex items-center gap-1 transition"
+                className="text-[11px] font-bold text-blue-400 hover:text-blue-300 uppercase tracking-widest flex items-center gap-1 transition-colors duration-150"
               >
                 <CheckSquare className="w-3.5 h-3.5" />
                 Mark as read
@@ -80,11 +81,11 @@ export function NotificationDropdown() {
                   key={note.id} 
                   href={`/thread/${note.thread_id}`}
                   onClick={() => setIsOpen(false)}
-                  className={`block p-4 border-b border-neutral-800/30 hover:bg-neutral-800 transition group ${
+                  className={`block p-4 border-b border-neutral-800/30 hover:bg-neutral-800 transition-colors duration-150 group ${
                     !note.is_read ? 'bg-neutral-800/20' : ''
                   }`}
                 >
-                  <p className="text-sm text-neutral-300 font-medium group-hover:text-white transition leading-snug">
+                  <p className="text-sm text-neutral-300 font-medium group-hover:text-white transition-colors duration-150 leading-snug">
                     <span className="font-bold text-white">{note.actor_handle}</span> 
                     {note.type === 'comment_reply' ? ' replied to your comment.' : ' infiltrated your thread.'}
                   </p>

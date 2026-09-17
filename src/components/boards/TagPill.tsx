@@ -14,7 +14,7 @@ export function TagPill({ tag, className, nonInteractive = false }: { tag: strin
     </>
   )
 
-  const classes = `inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full transition-all border shadow-sm ${
+  const classes = `inline-flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full transition-all duration-150 border shadow-sm ${
     className || `bg-neutral-900/80 border-neutral-800 text-neutral-400 hover:text-white ${neonHoverStyle}`
   }`
 

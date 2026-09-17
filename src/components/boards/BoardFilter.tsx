@@ -14,7 +14,7 @@ export function BoardFilter() {
       <div className="flex flex-wrap items-center justify-center gap-2 p-3 bg-neutral-900/80 border border-neutral-800/80 rounded-2xl backdrop-blur-md shadow-xl">
         <Link 
           href="/" 
-          className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all border ${
+          className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition-all duration-150 border ${
             currentTag === 'all' 
               ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.4)] scale-105' 
               : 'bg-neutral-900/80 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 hover:bg-neutral-800/80'
@@ -33,7 +33,7 @@ export function BoardFilter() {
             <Link 
               key={board.id}
               href={`/?tag=${board.id}`} 
-              className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl transition-all border ${
+              className={`inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl transition-all duration-150 border ${
                 isActive 
                   ? `${neonActive} scale-105 font-extrabold` 
                   : `bg-neutral-900/80 border-neutral-800 text-neutral-400 hover:text-white ${neonHover}`

@@ -20,24 +20,25 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
   const threadId = resolved.id
 
   const supabase = await createClient()
-  await supabase.rpc('increment_thread_views', { target_thread_id: threadId })
 
-  const data = await getThreadWithComments(threadId)
+  const [_, data, userRes] = await Promise.all([
+    supabase.rpc('increment_thread_views', { target_thread_id: threadId }),
+    getThreadWithComments(threadId),
+    supabase.auth.getUser()
+  ])
   
   if (!data) notFound()
     
   const { thread, comments } = data
   const profile = thread.profiles || {}
-
-  const { data: { user } } = await supabase.auth.getUser()
-  const isAuthenticated = !!user
+  const isAuthenticated = !!userRes.data?.user
 
   const isExpiredByTime = new Date(thread.expires_at).getTime() <= Date.now()
   const isExpired = thread.is_expired || isExpiredByTime
 
   return (
     <div className="max-w-3xl mx-auto w-full pb-20 pt-2 lg:pt-6">
-      <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition mb-6">
+      <Link href="/" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition-colors duration-150 mb-6">
         <ArrowLeft className="w-4 h-4" />
         Back to Feed
       </Link>
@@ -52,14 +53,29 @@ export default async function ThreadPage({ params }: { params: Promise<{ id: str
       <article className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 md:p-8 mb-4 shadow-2xl">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
-            <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-10 h-10 text-lg" />
-            <div>
-              <div className="text-base font-bold text-slate-200">{profile.handle}</div>
-              <div className="text-xs text-neutral-500 font-bold">{getTimeAgo(thread.created_at)}</div>
-            </div>
+            {profile.handle ? (
+              <Link 
+                href={`/profile/${encodeURIComponent(profile.handle)}`}
+                className="hover:underline flex items-center gap-3 group cursor-pointer z-10"
+              >
+                <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-10 h-10 text-lg shrink-0" />
+                <div>
+                  <div className="text-base font-bold text-slate-200 group-hover:text-white group-hover:underline">{profile.handle}</div>
+                  <div className="text-xs text-neutral-500 font-bold">{getTimeAgo(thread.created_at)}</div>
+                </div>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-3">
+                <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-10 h-10 text-lg shrink-0" />
+                <div>
+                  <div className="text-base font-bold text-slate-200">Anonymous</div>
+                  <div className="text-xs text-neutral-500 font-bold">{getTimeAgo(thread.created_at)}</div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <div className={cn("flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all", isExpired ? 'border-neutral-800 text-neutral-500 bg-neutral-900/50' : getTimerUrgencyStyle(thread.expires_at))}>
+            <div className={cn("flex items-center gap-1.5 text-xs font-bold px-3 py-1.5 rounded-xl border transition-all duration-150", isExpired ? 'border-neutral-800 text-neutral-500 bg-neutral-900/50' : getTimerUrgencyStyle(thread.expires_at))}>
               <Clock className="w-3.5 h-3.5" />
               <span>{isExpired ? 'EXPIRED' : `${getTimeRemaining(thread.expires_at)} left`}</span>
             </div>

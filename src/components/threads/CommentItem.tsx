@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { PersonaAvatar } from '../boards/PersonaAvatar'
 import { getTimeAgo } from '@/lib/utils'
 import { createComment, toggleCommentLike } from '@/app/actions/comments'
@@ -63,11 +64,23 @@ export function CommentItem({ comment, threadId, isExpired, isAuthenticated, dep
     <div className="flex flex-col gap-3 relative" style={{ marginLeft: paddingLeft }}>
       {depth > 0 && <div className="absolute left-[-10px] sm:left-[-1rem] top-4 bottom-0 w-px bg-neutral-800" />}
 
-      <div className="bg-neutral-900/20 border border-neutral-800/50 rounded-xl p-4 transition-colors hover:bg-neutral-900/40">
+      <div className="bg-neutral-900/20 border border-neutral-800/50 rounded-xl p-4 transition-colors duration-150 hover:bg-neutral-900/40">
         <div className="flex justify-between items-start mb-2">
           <div className="flex items-center gap-2">
-            <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-6 h-6 text-xs" />
-            <span className="text-sm font-bold text-slate-300">{profile.handle}</span>
+            {profile.handle ? (
+              <Link 
+                href={`/profile/${encodeURIComponent(profile.handle)}`}
+                className="hover:underline flex items-center gap-2 group cursor-pointer z-10"
+              >
+                <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-6 h-6 text-xs shrink-0" />
+                <span className="text-sm font-bold text-slate-300 group-hover:text-white group-hover:underline">{profile.handle}</span>
+              </Link>
+            ) : (
+              <div className="flex items-center gap-2">
+                <PersonaAvatar archetypeId={profile.persona || profile.archetype} className="w-6 h-6 text-xs shrink-0" />
+                <span className="text-sm font-bold text-slate-300">Anonymous</span>
+              </div>
+            )}
             <span className="text-xs text-neutral-600 font-bold whitespace-nowrap">
               {getTimeAgo(comment.created_at)}
             </span>
@@ -81,20 +94,20 @@ export function CommentItem({ comment, threadId, isExpired, isAuthenticated, dep
         <div className="flex items-center gap-4 text-xs font-bold">
           <button 
             onClick={handleLike}
-            className={`flex items-center gap-1.5 transition ${
+            className={`flex items-center gap-1.5 transition-colors duration-150 ${
               isLiked 
                 ? 'text-rose-500 font-black' 
                 : 'text-neutral-500 hover:text-rose-400'
             }`}
           >
-            <Heart className={`w-4 h-4 transition-all ${isLiked ? 'fill-rose-500 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] scale-110' : ''}`} />
+            <Heart className={`w-4 h-4 transition-all duration-150 ${isLiked ? 'fill-rose-500 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)] scale-110' : ''}`} />
             <span>{likesCount > 0 ? likesCount : ''}</span>
           </button>
 
           {!isExpired && isAuthenticated && (
             <button 
               onClick={() => setIsReplying(!isReplying)}
-              className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition"
+              className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-neutral-500 hover:text-white transition-colors duration-150"
             >
               <Reply className="w-3.5 h-3.5" />
               Reply
